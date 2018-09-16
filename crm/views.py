@@ -8,8 +8,9 @@ from django.contrib.auth.decorators import login_required
 
 now = timezone.now()
 def home(request):
-   return render(request, 'crm/home.html',
-                 {'crm': home})
+        return render(request, 'crm/home.html',
+                      {'crm': home})
+
 def signup(request):
     global form
     if request.method == 'POST':
