@@ -46,7 +46,13 @@
         <div class="control-group">
             <!-- Button -->
             <div class="controls">
-                <p><a class="btn btn-success" href="{% url 'login' %}" role="button">Signup</a></p>
+                <form method="post" action=".">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="submit" value="signup"/>
+
+    </form>
+
             </div>
         </div>
     </fieldset>

@@ -1,4 +1,3 @@
-{% extends 'crm/base.html' %}
 {% load staticfiles %}
 {% block content %}
 {% if form.errors %}
@@ -51,6 +50,8 @@
                 </button>
 
             </div>
+            <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{% url 'crm:signup' %}"><span class="glyphicon glyphicon-log-in"></span> signup</a></li></ul>
 
 
             <!-- /.navbar-collapse -->

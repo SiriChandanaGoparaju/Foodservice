@@ -16,13 +16,16 @@ def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
+            new_user = form.save(commit=False)
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
+            new_user.set_password(raw_password)
             user = authenticate(username=username, password=raw_password)
+            new_user.save()
             login(request, user)
-            return redirect('crm:login')
+            return render(request, 'registration/login.html', {'new_user': new_user})
     else:
+            form = SignUpForm()
             return render(request,'registration/signup.html',
                  {'registration': signup} )
 @login_required
@@ -130,7 +133,7 @@ def product_new(request):
            product = form.save(commit=False)
            product.created_date = timezone.now()
            product.save()
-           products = Products.objects.filter(created_date__lte=timezone.now())
+           products = Product.objects.filter(created_date__lte=timezone.now())
            return render(request, 'crm/product_list.html',
                          {'products': products})
    else:
